@@ -1,0 +1,33 @@
+contracts/v1-freeze.json
+  s_1edf569f022c1c::t_0e64137ddee4e5 1-21
+corpus/v1-fixtures.js
+  s_1edf569f022c1c::t_61b16b5c8ba379 1-77
+src/canonical.js
+  s_1edf569f022c1c::t_ce8be2d68b33bc 1-84
+src/evaluate.js
+  s_1edf569f022c1c::t_5b9c528f40897d 1-111
+src/fingerprints.js
+  s_1edf569f022c1c::t_e90dfae8e1cd3c 1-44
+src/gates.js
+  s_1edf569f022c1c::t_052fbe63d12386 1-67
+src/index.js
+  s_1edf569f022c1c::t_32a4b7fa4e642c 1-4
+src/schema.js
+  s_1edf569f022c1c::t_b576bdd6d4c7f5 1-342
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "727d0bcb0a8a247fc33a0f1536a6afa6764b8111",
+  "prompts": {},
+  "sessions": {
+    "s_1edf569f022c1c": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a0df3d-f9fc-74ea-ae36-1d244e193f8b",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jordan Coeyman <coeyman@gmail.com>"
+    }
+  }
+}
