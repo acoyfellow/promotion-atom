@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "policyVersion": "v1-personal-readonly-review",
+  "owner": "owner:synthetic",
+  "allowedKinds": ["procedure", "prompt", "skill", "tool"],
+  "allowedCapabilities": ["compute.pure", "fs.read", "fs.writeBounded", "http.get.allowlisted"],
+  "autoEnableCapabilities": ["compute.pure", "fs.read"],
+  "forbiddenCapabilityPrefixes": ["cloudbox.", "exec.arbitrary", "machine.", "net.", "secret."],
+  "maxSourceBytes": 16384,
+  "minSourceBytes": 64,
+  "maxCandidatesPerWindow": 3,
+  "historyWindowSize": 32,
+  "minDistinctInputsForPromote": 2,
+  "minIndependentSuccessesForPromote": 2,
+  "maxRetriesForReview": 0,
+  "requireObjectiveVerificationForPromote": true,
+  "requireReplayForPromote": true,
+  "autoEnable": false
+}

@@ -1,0 +1,54 @@
+{
+  "contractVersion": 1,
+  "entrypoint": "evaluatePromotion(candidate, evidence, catalog, policy)",
+  "canonicalization": {
+    "jsonOnly": true,
+    "strings": "NFC",
+    "objectKeys": "lexicographic",
+    "setArrays": ["declaredCapabilities", "executedCapabilities", "allowedKinds", "allowedCapabilities", "autoEnableCapabilities", "forbiddenCapabilityPrefixes"],
+    "evidenceIdentity": "receiptId",
+    "evidenceOrder": "receiptId lexicographic after duplicate collapse",
+    "unknownFields": "schema_invalid",
+    "unknownVersions": "schema_invalid",
+    "invalidBehavior": "return suppress; never throw"
+  },
+  "types": {
+    "CandidateArtifact": {
+      "required": ["schemaVersion", "owner", "kind", "source", "sourceHash", "language", "declaredCapabilities", "portable", "signals", "extraction"],
+      "fields": {
+        "schemaVersion": "literal:1", "owner": "nonempty-string", "kind": "tool|skill|procedure|prompt", "source": "string", "sourceHash": "sha256-lowercase-hex", "language": "nonempty-string", "declaredCapabilities": "unique-string-array", "portable": "boolean",
+        "signals": {"explicitMarker": "boolean", "parameterizedInput": "boolean", "embeddedSecretRisk": "boolean", "nondeterminismRisk": "boolean", "externalWriteWithoutRollback": "boolean", "concreteLiteralOnly": "boolean"},
+        "extraction": {"source": "runtime|llm|human|import", "extractorId": "optional-string", "extractorVersion": "optional-string"},
+        "proposedName": "optional-string", "proposedDescription": "optional-string", "inputSchema": "optional-json-object"
+      }
+    },
+    "ExecutionEvidence": {
+      "required": ["schemaVersion", "receiptId", "owner", "candidateSourceHash", "structureFingerprint", "outcome", "executedCapabilities", "verification", "interventionCount", "retryCount", "sideEffectClass", "replay", "provenance"],
+      "fields": {
+        "schemaVersion": "literal:1", "receiptId": "nonempty-string", "owner": "nonempty-string", "candidateSourceHash": "sha256-lowercase-hex", "structureFingerprint": "nonempty-string", "inputFingerprint": "optional-string", "resultFingerprint": "optional-string", "outcome": "ok|error|cancelled|timeout|inconclusive", "executedCapabilities": "unique-string-array", "verification": "array:{kind:assertion|downstream-receipt|objective-eval|user-approval,ok:boolean}", "interventionCount": "nonnegative-integer", "retryCount": "nonnegative-integer", "sideEffectClass": "read|bounded-write|external-write|unknown", "replay": "not-run|passed|failed", "provenance": "{harness:nonempty-string,harnessVersion?:string,signer?:string}"
+      }
+    },
+    "CatalogSnapshot": {
+      "required": ["schemaVersion", "owner", "entries", "recentCandidateCount"],
+      "fields": {"schemaVersion": "literal:1", "owner": "nonempty-string", "entries": "array:CatalogEntry", "recentCandidateCount": "nonnegative-integer"},
+      "CatalogEntry": "{candidateKey:string,familyKey:string,declaredCapabilities:unique-string-array,status:observed|reviewable|promoted|enabled|suppressed|disabled|deprecated|superseded,evidenceCount:nonnegative-integer,distinctInputCount:nonnegative-integer}"
+    },
+    "PromotionPolicy": {
+      "required": ["schemaVersion", "policyVersion", "owner", "allowedKinds", "allowedCapabilities", "autoEnableCapabilities", "forbiddenCapabilityPrefixes", "maxSourceBytes", "minSourceBytes", "maxCandidatesPerWindow", "historyWindowSize", "minDistinctInputsForPromote", "minIndependentSuccessesForPromote", "maxRetriesForReview", "requireObjectiveVerificationForPromote", "requireReplayForPromote", "autoEnable"],
+      "fields": {"schemaVersion": "literal:1", "policyVersion": "nonempty-string", "owner": "nonempty-string", "allowedKinds": "unique-kind-array", "allowedCapabilities": "unique-string-array", "autoEnableCapabilities": "unique-string-array-subset-of-allowedCapabilities", "forbiddenCapabilityPrefixes": "unique-string-array", "maxSourceBytes": "positive-integer", "minSourceBytes": "nonnegative-integer<=maxSourceBytes", "maxCandidatesPerWindow": "nonnegative-integer", "historyWindowSize": "nonnegative-integer", "minDistinctInputsForPromote": "positive-integer", "minIndependentSuccessesForPromote": "positive-integer", "maxRetriesForReview": "nonnegative-integer", "requireObjectiveVerificationForPromote": "boolean", "requireReplayForPromote": "boolean", "autoEnable": "boolean"}
+    },
+    "PromotionDecision": {
+      "fields": {"schemaVersion": "literal:1", "disposition": "promote|review|suppress", "candidateKey": "string", "familyKey": "string", "policyVersion": "string", "inputDigest": "sha256-lowercase-hex", "reasons": "sorted-unique-reason-array", "gates": "fixed-order-GateResult-array", "evidenceRefs": "sorted-unique-receiptId-array", "activationEligible": "boolean", "nextEvidenceNeeded": "sorted-array:distinct-input|objective-verification|post-abstraction-replay|narrower-capability"}
+    }
+  },
+  "gateOrder": ["schema_valid", "owner_isolated", "source_bound", "kind_allowed", "source_quality", "execution_successful", "authority_bounded", "static_findings_clear", "intervention_bounded", "history_bounded"],
+  "reasonCodes": ["schema_invalid", "source_hash_mismatch", "owner_mismatch", "kind_disallowed", "source_too_small", "source_too_large", "failed_execution", "success_unverified", "capability_undeclared", "capability_forbidden", "capability_disallowed", "capability_widened", "embedded_secret_risk", "external_write_without_rollback", "nondeterminism_uncontrolled", "concrete_literal_only", "owner_intervention", "retries_exceeded", "post_abstraction_replay_failed", "duplicate_exact", "duplicate_near", "candidate_budget_exceeded", "high_authority_inline_only", "nonportable", "success_verified", "parameterized_input", "explicit_marker_present", "novel_family", "capability_subset", "needs_corroboration", "distinct_input_corroboration", "post_abstraction_replay_passed", "owner_auto_enable_allowed", "owner_auto_enable_forbidden"],
+  "routing": {
+    "suppressOn": ["schema_invalid", "source_hash_mismatch", "owner_mismatch", "kind_disallowed", "source_too_small", "source_too_large", "failed_execution", "capability_undeclared", "capability_forbidden", "capability_disallowed", "capability_widened", "embedded_secret_risk", "external_write_without_rollback", "nondeterminism_uncontrolled", "concrete_literal_only", "owner_intervention", "retries_exceeded", "post_abstraction_replay_failed", "duplicate_exact", "duplicate_near", "candidate_budget_exceeded"],
+    "reviewWhen": "all hard gates pass and promote corroboration is incomplete",
+    "promoteWhen": "all hard gates pass; independent successful receipts and distinct input fingerprints meet policy; objective verification and replay requirements pass",
+    "activationEligibleWhen": "disposition is promote; autoEnable true; candidate portable; all declared and executed capabilities are subsets of autoEnableCapabilities; no high-authority reason; never performs activation"
+  },
+  "fingerprints": {"candidateKey": "sha256(canonicalJSON([owner,kind,sourceHash,declaredCapabilities]))", "familyKey": "sha256(canonicalJSON([owner,kind,sorted unique evidence.structureFingerprint values]))", "inputDigest": "sha256(canonicalJSON([candidate,dedupedEvidence,catalog,policy]))"},
+  "deferred": ["runtime execution", "persistence", "activation", "registry", "clock-based freshness", "semantic embeddings", "multi-signer trust", "network and secret authority profiles", "model extraction"]
+}

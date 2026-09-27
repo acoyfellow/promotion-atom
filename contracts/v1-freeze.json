@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "baseArtifacts": [
+    {"path":"contracts/v1.json","sha256":"3eb3373851c8ce691c99e0e2671e61ecdd0e730ad6fd885aee957f36edc90aed"},
+    {"path":"policies/v1.json","sha256":"65caaa254ef16408a3307dcafd9a5e6ddfe92cab73aa76c75cb9e8ced4d132e4"},
+    {"path":"corpus/v1-manifest.json","sha256":"e74fd9c802348b9510397aa3baa02738d34818feb898e1f28266823a32aab8bf"},
+    {"path":"docs/CONTRACT_V1.md","sha256":"be8745197fa3df1a869132c498c255c913b80c06098ad8be4406890fe9620123"}
+  ],
+  "baseAggregateSha256": "83cc1a53a5414c6ed216d7c3dbdf4e037315dadd09ab4ab7be72b6f20a421872",
+  "syntheticFixtures": {
+    "path": "corpus/v1-fixtures.js",
+    "rawSha256": "fa59049aa77356dcd380be7c777fc15ba4aef110ae13aab54d2b0fd2e5ddaddf",
+    "canonicalSha256": "25316bb13d8b56592e514676e40e50419015a24684fcf558b039eaf2c8f4d833",
+    "decisionCorpusCanonicalSha256": "a91f1c8170e8cce0d0fb6658e289de1e0919eb7ba7a73fadfcd3008b3e8f24a7"
+  },
+  "clarifications": {
+    "reasonOrder": "The order of contracts/v1.json reasonCodes is canonical; sorted-unique-reason-array means unique values in that declared order, not lexical order.",
+    "conflictingReceiptIds": "Two evidence objects with one receiptId but different canonical bytes are schema_invalid and suppress.",
+    "externalWriteWithoutRollback": "Because v1 has no rollback-proof field, any evidence sideEffectClass of external-write produces external_write_without_rollback and suppresses."
+  }
+}

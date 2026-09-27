@@ -1,0 +1,6 @@
+test/
+LOOP.md
+coverage/
+*.log
+.env
+.env.*

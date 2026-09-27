@@ -1,0 +1,16 @@
+{
+  "name": "promotion-atom",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Deterministic evidence-to-promotion decision kernel for reusable agent artifacts",
+  "type": "module",
+  "exports": "./src/index.js",
+  "scripts": {
+    "test": "node --test",
+    "check": "npm test"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
