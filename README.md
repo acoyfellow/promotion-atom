@@ -44,6 +44,25 @@ npm test
 
 The suite covers all 16 frozen fixtures plus determinism, ordering, deduplication, owner isolation, authority monotonicity, marker/extractor non-bypass, budget bounds, replay, and activation eligibility.
 
+## Lean proofs
+
+`lean/` models the decision order in Lean 4 and proves four rules for every input:
+
+1. An external write always suppresses.
+2. A hard failure never promotes.
+3. Activation requires promote.
+4. Clean, corroborated, verified, and replayed work always promotes.
+
+![What the claims say](lean/claims-diagram.png)
+
+The claims are in `lean/Claims.lean`. The proofs are in `lean/Proofs/Rules.lean`. `lean/lean-gate.lock` pins the claims, so a changed claim fails the check.
+
+```sh
+sh <terraloop-mode>/skills/terraloop/lean-gate.sh lean
+```
+
+The model covers the decision order only. It treats the other suppress reasons and the readiness checks as given booleans. It is not yet linked to `src/evaluate.js` by a differential test.
+
 ## Safety and publication
 
 Do not publish, deploy, or push this repository without explicit owner approval and a fresh OSS provenance audit. No private replay evidence belongs in this repository.
