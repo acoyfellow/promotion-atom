@@ -1,0 +1,49 @@
+README.md
+  s_bddf4eb8848d16::t_13425c3f4bfc76 47-65
+lean/.gitignore
+  s_fc002e6ac2c2f5::t_9f0e1065aeffb1 1
+lean/Check.lean
+  s_fc002e6ac2c2f5::t_8b4e24e5782739 1-10
+lean/Claims.lean
+  s_1edf569f022c1c::t_67ba4877c9b0a9 1-60
+lean/lake-manifest.json
+  s_fc002e6ac2c2f5::t_66f039c5e427d7 1-6
+lean/lakefile.toml
+  s_fc002e6ac2c2f5::t_16c0e5812b8868 1-6
+lean/lean-gate.lock
+  s_fc002e6ac2c2f5::t_c8909eb32a41d0 1-4
+lean/lean-toolchain
+  s_fc002e6ac2c2f5::t_f920232a80a6d9 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "1a130c7b08efe8c99ed2e80c3c90c23d8dded7a6",
+  "prompts": {},
+  "sessions": {
+    "s_1edf569f022c1c": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a0df3d-f9fc-74ea-ae36-1d244e193f8b",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jordan Coeyman <coeyman@gmail.com>"
+    },
+    "s_bddf4eb8848d16": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a0de5b-f971-75f6-97ad-8153da509084",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jordan Coeyman <coeyman@gmail.com>"
+    },
+    "s_fc002e6ac2c2f5": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a0aab9-f490-72e1-8d73-920246e8faec",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Jordan Coeyman <coeyman@gmail.com>"
+    }
+  }
+}
